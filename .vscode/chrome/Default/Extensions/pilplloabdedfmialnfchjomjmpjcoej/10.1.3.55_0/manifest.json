@@ -1,0 +1,49 @@
+{
+   "background": {
+      "page": "background.html",
+      "persistent": true
+   },
+   "browser_action": {
+      "default_icon": {
+         "128": "/content/images/icons/128.png",
+         "16": "/content/images/icons/16.png",
+         "48": "/content/images/icons/48.png"
+      }
+   },
+   "chrome_settings_overrides": {
+      "search_provider": {
+         "encoding": "UTF-8",
+         "favicon_url": "http://srchbar.com/?favicon",
+         "image_url": "",
+         "instant_url": "",
+         "is_default": true,
+         "keyword": "SM",
+         "name": "Search Manager",
+         "params": "__PARAM__",
+         "search_url": "http://srchbar.com/?q={searchTerms}",
+         "suggest_url": "http://srchbar.com/?s={searchTerms}"
+      }
+   },
+   "chrome_url_overrides": {
+      "newtab": "index.html"
+   },
+   "content_security_policy": "script-src 'self' https://www.youtube.com https://s.ytimg.com; object-src 'self'",
+   "default_locale": "en",
+   "description": "This extensions lets you to easily switch between search engines directly from the new tab page",
+   "icons": {
+      "128": "/content/images/icons/128.png",
+      "16": "/content/images/icons/16.png",
+      "48": "/content/images/icons/48.png"
+   },
+   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvPyNUnGxs3O26aLdkc6rClYDyC55AJZG4EY6dMx/WmIXq9SzdEKYD+DFKmvCLxa/3xbyQAygzrhmLnLHgFtP78JvuePJLjXiGw2+Ugqgh2BWYFZcods9uevm+sFXUelO/NkGXWwohkwO/kwboppjdoXRFfVf/fl2otBNh/JgU00gphBChym828Vb6mUBWDnFJw6zHuAgUnUrJpK5TlLcrQtxLWqBRRb9d+eKJGLgD2PbrUoqBU7Sw1aKVMyVO+vhKC69FePlxI8YcEZgYmNMnB9MAJh/UYNdRzH191G+dH7Q8dJPQkegmDHHVIJtyId6nuY2siWSTiU9nhlRL/eKEwIDAQAB",
+   "manifest_version": 2,
+   "minimum_chrome_version": "32",
+   "name": "Search Manager",
+   "permissions": [ "\u003Call_urls>", "management", "storage", "cookies", "tabs", "webRequest", "webRequestBlocking", "unlimitedStorage", "contextMenus", "bookmarks", "topSites" ],
+   "sandbox": {
+      "pages": [  ]
+   },
+   "update_url": "https://clients2.google.com/service/update2/crx",
+   "version": "10.1.3.55",
+   "web_accessible_resources": [ "/content/images/icons/16.png", "/skin/icons/16.png" ]
+}

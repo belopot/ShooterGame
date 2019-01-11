@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "soundOFF",
+    "texture": "4024fc07-f064-414e-ba52-defbed4f6c36",
+    "atlas": "",
+    "rect": [
+      1,
+      2,
+      102,
+      102
+    ],
+    "offset": [
+      -0.5,
+      -0.5
+    ],
+    "originalSize": [
+      105,
+      105
+    ]
+  }
+}

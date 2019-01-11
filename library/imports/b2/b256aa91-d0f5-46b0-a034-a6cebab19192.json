@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "homeicon",
+    "texture": "440bb972-ab3a-4965-9d1a-0f4dfa408fe5",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      150,
+      131
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      150,
+      131
+    ]
+  }
+}

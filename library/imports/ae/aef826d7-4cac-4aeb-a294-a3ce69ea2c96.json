@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "hitBricks",
+    "texture": "87f4c329-a390-4b68-bd75-2ce169c70fc2",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      634,
+      512
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      634,
+      512
+    ]
+  }
+}

@@ -1,0 +1,639 @@
+window._CCSettings = {
+    designWidth: 1080,
+    designHeight: 1920,
+    groupList: [
+        "default"
+    ],
+    collisionMatrix: [
+        [
+            true
+        ]
+    ],
+    platform: "web-desktop",
+    scripts: [
+        {
+            deps: {
+                commonHandler: 4
+            },
+            file: "preview-scripts/assets/script/block.js"
+        },
+        {
+            deps: {
+                commonHandler: 4
+            },
+            file: "preview-scripts/assets/script/blockList.js"
+        },
+        {
+            deps: {},
+            file: "preview-scripts/assets/script/bonusFrame.js"
+        },
+        {
+            deps: {
+                commonHandler: 4
+            },
+            file: "preview-scripts/assets/script/bullet.js"
+        },
+        {
+            deps: {},
+            file: "preview-scripts/assets/script/commonHandler.js"
+        },
+        {
+            deps: {},
+            file: "preview-scripts/assets/script/cover.js"
+        },
+        {
+            deps: {
+                commonHandler: 4
+            },
+            file: "preview-scripts/assets/script/endBlock.js"
+        },
+        {
+            deps: {
+                commonHandler: 4
+            },
+            file: "preview-scripts/assets/script/game.js"
+        },
+        {
+            deps: {
+                commonHandler: 4
+            },
+            file: "preview-scripts/assets/script/gameOver.js"
+        },
+        {
+            deps: {},
+            file: "preview-scripts/assets/script/lib/scaleX.js"
+        },
+        {
+            deps: {},
+            file: "preview-scripts/assets/script/lib/scaleY.js"
+        },
+        {
+            deps: {},
+            file: "preview-scripts/assets/script/lib/zoomAnimBtn.js"
+        },
+        {
+            deps: {},
+            file: "preview-scripts/assets/script/lib/zoomBtn.js"
+        },
+        {
+            deps: {
+                commonHandler: 4
+            },
+            file: "preview-scripts/assets/script/player.js"
+        },
+        {
+            deps: {
+                commonHandler: 4
+            },
+            file: "preview-scripts/assets/script/rankView.js"
+        },
+        {
+            deps: {
+                commonHandler: 4
+            },
+            file: "preview-scripts/assets/script/specList.js"
+        },
+        {
+            deps: {
+                commonHandler: 4
+            },
+            file: "preview-scripts/assets/script/start.js"
+        }
+    ],
+    rawAssets: {
+        assets: {
+            "108cbd26-94a1-40e8-a5ea-206b6de9dc51": [
+                "prefab/particle_texture.plist",
+                "cc.ParticleAsset"
+            ],
+            "f02e3411-7d09-45e6-984f-142180205162": [
+                "resources/font/font",
+                "cc.SpriteFrame",
+                1
+            ],
+            "99922a54-f7fc-4885-b09f-968a2553da7f": [
+                "resources/font/font.fnt",
+                "cc.BitmapFont"
+            ],
+            "c0cf9d8c-f9e9-4958-a45b-5f1a169aeed0": [
+                "resources/font/font.png",
+                "cc.Texture2D"
+            ],
+            "73e085da-5b32-44c7-9a9b-f5bade07df4a": [
+                "resources/font/shadow",
+                "cc.SpriteFrame",
+                1
+            ],
+            "b2a1416a-e74d-42ba-8c96-7bd1250b335c": [
+                "resources/font/shadow.fnt",
+                "cc.BitmapFont"
+            ],
+            "c88e4a45-442c-4f5d-92c4-1f7421041bdd": [
+                "resources/font/shadow.png",
+                "cc.Texture2D"
+            ],
+            "0f3fc428-58a9-4437-bfe8-f8ae39cc3259": [
+                "resources/images/actor",
+                "cc.SpriteFrame",
+                1
+            ],
+            "0c939d42-abea-4f00-ace8-bd49bd11d124": [
+                "resources/images/actor.png",
+                "cc.Texture2D"
+            ],
+            "16d204b1-e4e1-45c1-bf1a-ef1c1b1e82bc": [
+                "resources/images/app/Play",
+                "cc.SpriteFrame",
+                1
+            ],
+            "b539d0a6-4d6f-40e4-8f89-a22666a1c6ff": [
+                "resources/images/app/Play.png",
+                "cc.Texture2D"
+            ],
+            "10498873-d6aa-41df-b812-0e9ddce9233b": [
+                "resources/images/app/gameOver/Try Again",
+                "cc.SpriteFrame",
+                1
+            ],
+            "f0103064-f34b-41df-b5c4-41e12be3ffbd": [
+                "resources/images/app/gameOver/Try Again.png",
+                "cc.Texture2D"
+            ],
+            "18c0f62d-1e33-4ea4-9768-b429f80cfe18": [
+                "resources/images/app/gameOver/again",
+                "cc.SpriteFrame",
+                1
+            ],
+            "8969c062-c961-4d1c-8050-397109a9e8cc": [
+                "resources/images/app/gameOver/again.png",
+                "cc.Texture2D"
+            ],
+            "e833e7b9-e807-4d3a-b206-2ae1711b426d": [
+                "resources/images/app/gameOver/bg",
+                "cc.SpriteFrame",
+                1
+            ],
+            "81c3dcea-1032-462c-9fd6-1924a7003eb1": [
+                "resources/images/app/gameOver/bg.png",
+                "cc.Texture2D"
+            ],
+            "60cae505-707f-4df1-bb55-c62f2e329402": [
+                "resources/images/app/gameOver/continue",
+                "cc.SpriteFrame",
+                1
+            ],
+            "90362f3e-fb93-4004-b2e6-8f78a805c49b": [
+                "resources/images/app/gameOver/continue.png",
+                "cc.Texture2D"
+            ],
+            "5cffe31e-2b22-4253-a8c0-51719411df03": [
+                "resources/images/app/gameOver/rank",
+                "cc.SpriteFrame",
+                1
+            ],
+            "0c70d7bf-4cf9-4de7-ae7c-02717a2913fc": [
+                "resources/images/app/gameOver/rank.png",
+                "cc.Texture2D"
+            ],
+            "01488eec-42dd-4d38-91c6-6ec729abaef8": [
+                "resources/images/app/gameOver/share",
+                "cc.SpriteFrame",
+                1
+            ],
+            "cd7cae18-5c0b-4706-bc00-287a82794fcd": [
+                "resources/images/app/gameOver/share.png",
+                "cc.Texture2D"
+            ],
+            "d41160ae-63ed-45ca-a096-2dd22ae304ad": [
+                "resources/images/app/icon",
+                "cc.SpriteFrame",
+                1
+            ],
+            "ed08ae1c-8e9e-4c6c-ba08-249285e6cc4a": [
+                "resources/images/app/icon.png",
+                "cc.Texture2D"
+            ],
+            "d6f3a555-b81f-4ee0-a296-8d62f570cca5": [
+                "resources/images/app/kuai",
+                "cc.SpriteFrame",
+                1
+            ],
+            "00d9bd65-ad40-420a-a9a2-f27a24f1ab3d": [
+                "resources/images/app/kuai.png",
+                "cc.Texture2D"
+            ],
+            "3a4b1f1e-76ab-421d-9995-d298f3ce1de6": [
+                "resources/images/app/set/back",
+                "cc.SpriteFrame",
+                1
+            ],
+            "53d7d5d7-66e7-48a7-8846-afd98aca63af": [
+                "resources/images/app/set/back.png",
+                "cc.Texture2D"
+            ],
+            "191a1145-185e-4c63-859b-2165125fc05d": [
+                "resources/images/app/set/mute",
+                "cc.SpriteFrame",
+                1
+            ],
+            "3bd5f403-d7e3-41f7-9038-bc9f3766e0d6": [
+                "resources/images/app/set/mute.png",
+                "cc.Texture2D"
+            ],
+            "fb57dc3c-2a0e-4650-a80c-44477694a088": [
+                "resources/images/app/set/scorebg",
+                "cc.SpriteFrame",
+                1
+            ],
+            "3fffccca-6d4e-40c0-b797-5834360084a7": [
+                "resources/images/app/set/scorebg.png",
+                "cc.Texture2D"
+            ],
+            "e0c8f303-588f-4feb-836c-6f206eabddd7": [
+                "resources/images/app/set/sound",
+                "cc.SpriteFrame",
+                1
+            ],
+            "11ac9a5e-a82e-40d0-a488-a23303b708d9": [
+                "resources/images/app/set/sound.png",
+                "cc.Texture2D"
+            ],
+            "a120634e-cf84-4840-ae5e-dd3f538ce8ac": [
+                "resources/images/app/trans-bg",
+                "cc.SpriteFrame",
+                1
+            ],
+            "a9f8a60b-cb0c-4d75-88af-0651193f8d74": [
+                "resources/images/app/trans-bg.png",
+                "cc.Texture2D"
+            ],
+            "df67963a-c9f0-4145-921b-471ac24ee6d4": [
+                "resources/images/bg",
+                "cc.SpriteFrame",
+                1
+            ],
+            "380e49ee-13e2-40ff-b266-1533fbd9decb": [
+                "resources/images/bg.jpg",
+                "cc.Texture2D"
+            ],
+            "619199a7-9fcb-4ac6-b48e-c0195ac06f51": [
+                "resources/images/bonusFrame",
+                "cc.SpriteFrame",
+                1
+            ],
+            "08b3a4e5-dc6e-456c-bd04-ffcfd4495200": [
+                "resources/images/bonusFrame.png",
+                "cc.Texture2D"
+            ],
+            "e8363015-c831-496a-a04e-de5fb1d1c372": [
+                "resources/images/bonusPan",
+                "cc.SpriteFrame",
+                1
+            ],
+            "d7b14745-c0d0-4d01-a46d-099cbdfcfebc": [
+                "resources/images/bonusPan.png",
+                "cc.Texture2D"
+            ],
+            "f25cc066-d31b-4294-a8e1-69038d6df793": [
+                "resources/images/brick",
+                "cc.SpriteFrame",
+                1
+            ],
+            "d0654474-577b-428b-8514-2b8e544f5106": [
+                "resources/images/brick.png",
+                "cc.Texture2D"
+            ],
+            "7276f378-e4f0-4b50-89ad-de09b4ba70dd": [
+                "resources/images/btnFrame",
+                "cc.SpriteFrame",
+                1
+            ],
+            "a5a9ac45-b997-404f-85b0-c9c59c1c8bba": [
+                "resources/images/btnFrame.png",
+                "cc.Texture2D"
+            ],
+            "8ab54a52-5ce8-4542-8e6b-874665ae0f49": [
+                "resources/images/bullet",
+                "cc.SpriteFrame",
+                1
+            ],
+            "3ea0b65b-9a20-4831-be58-ccc5158e7157": [
+                "resources/images/bullet.png",
+                "cc.Texture2D"
+            ],
+            "77e36848-5085-4bda-9dbd-ab33db912445": [
+                "resources/images/changeShape",
+                "cc.SpriteFrame",
+                1
+            ],
+            "ff837718-5498-4f97-8451-656bd359c7f4": [
+                "resources/images/changeShape.png",
+                "cc.Texture2D"
+            ],
+            "fc36239c-1e82-43c9-9d85-c14639d79703": [
+                "resources/images/circle",
+                "cc.SpriteFrame",
+                1
+            ],
+            "3fbed23b-3c3d-46a9-b81b-55585a486040": [
+                "resources/images/circle.png",
+                "cc.Texture2D"
+            ],
+            "d18d3595-8281-4a16-ac1e-27f2fd8348e6": [
+                "resources/images/closeBtn",
+                "cc.SpriteFrame",
+                1
+            ],
+            "51cbcccf-6c3e-46b9-86bf-68b46a4863b6": [
+                "resources/images/closeBtn.png",
+                "cc.Texture2D"
+            ],
+            "398dc1a1-588d-4b6f-ac5d-1866a1c26762": [
+                "resources/images/closeHover",
+                "cc.SpriteFrame",
+                1
+            ],
+            "85dd9ba8-3c03-4dd6-b9db-9e2d4cc52df9": [
+                "resources/images/closeHover.png",
+                "cc.Texture2D"
+            ],
+            "8acd9813-e59c-4066-95ff-d84270fad850": [
+                "resources/images/continuetn",
+                "cc.SpriteFrame",
+                1
+            ],
+            "b837502b-e099-4d75-bdeb-f2fd2d2553ff": [
+                "resources/images/continuetn.png",
+                "cc.Texture2D"
+            ],
+            "d5f99983-9179-43d9-8d8b-57537c6a7bea": [
+                "resources/images/cover",
+                "cc.SpriteFrame",
+                1
+            ],
+            "93a89dc0-d268-424b-b82f-76e89ec0cd62": [
+                "resources/images/cover.png",
+                "cc.Texture2D"
+            ],
+            "a053556f-3a82-4a2a-8627-e193999acaaa": [
+                "resources/images/endBlock",
+                "cc.SpriteFrame",
+                1
+            ],
+            "8704ffd5-ea4c-49bb-bb5d-5184a65fb509": [
+                "resources/images/endBlock.png",
+                "cc.Texture2D"
+            ],
+            "692284cc-eead-4902-ae86-e258d77e700b": [
+                "resources/images/gameBG",
+                "cc.SpriteFrame",
+                1
+            ],
+            "5c294b55-dd13-41d3-83ac-52457dafd79d": [
+                "resources/images/gameBG.jpg",
+                "cc.Texture2D"
+            ],
+            "21ef294c-afcc-4bea-afb7-078f06918ac9": [
+                "resources/images/icon",
+                "cc.SpriteFrame",
+                1
+            ],
+            "a4f10930-e435-42ae-864e-613844192bec": [
+                "resources/images/icon.png",
+                "cc.Texture2D"
+            ],
+            "ee176be1-aba3-4df4-aa49-c6a0bc6e72ac": [
+                "resources/images/multi",
+                "cc.SpriteFrame",
+                1
+            ],
+            "c2284f20-e399-4b3c-b773-3a89d24d2221": [
+                "resources/images/multi.png",
+                "cc.Texture2D"
+            ],
+            "d8a52cb8-1aeb-46e1-af98-1843ffb39fd9": [
+                "resources/images/overlay",
+                "cc.SpriteFrame",
+                1
+            ],
+            "49ae4eae-3c9b-4605-8970-3117847066d4": [
+                "resources/images/overlay.png",
+                "cc.Texture2D"
+            ],
+            "472a4e37-4bfa-4212-99b7-7608efa732f1": [
+                "resources/images/overlayIcon",
+                "cc.SpriteFrame",
+                1
+            ],
+            "d568c073-6489-4d93-a689-76c8f7fbd3c9": [
+                "resources/images/overlayIcon.png",
+                "cc.Texture2D"
+            ],
+            "9392415f-2a37-4066-838e-ebf88640bdf8": [
+                "resources/images/power",
+                "cc.SpriteFrame",
+                1
+            ],
+            "c271fb63-30d5-49dc-84d2-86f835601652": [
+                "resources/images/power.png",
+                "cc.Texture2D"
+            ],
+            "1fad9ac6-6eaf-4cad-b55d-affd18056961": [
+                "resources/images/rankIcon",
+                "cc.SpriteFrame",
+                1
+            ],
+            "6f217d4e-3fe8-48e7-aeb5-0c55a5961dc8": [
+                "resources/images/rankIcon.png",
+                "cc.Texture2D"
+            ],
+            "7f416111-a1df-49fc-8667-94a2798e9577": [
+                "resources/images/restart",
+                "cc.SpriteFrame",
+                1
+            ],
+            "eafef744-fe9c-46bc-85d5-e62dd38db4e7": [
+                "resources/images/restart.jpg",
+                "cc.Texture2D"
+            ],
+            "42295eb1-8fd5-44cf-afa0-09cd6874803e": [
+                "resources/images/rocket",
+                "cc.SpriteFrame",
+                1
+            ],
+            "cb2bee56-0b11-4578-9106-2c7618aad1f8": [
+                "resources/images/rocket.png",
+                "cc.Texture2D"
+            ],
+            "ef55b580-3065-4a45-8d9a-6f56eeaf98b6": [
+                "resources/images/shareIcon",
+                "cc.SpriteFrame",
+                1
+            ],
+            "b3771dbe-a5f2-4056-ae3b-591b5825b2b6": [
+                "resources/images/shareIcon.png",
+                "cc.Texture2D"
+            ],
+            "201d2e59-ed36-483c-8d19-9ba5739ce48d": [
+                "resources/images/singleColor",
+                "cc.SpriteFrame",
+                1
+            ],
+            "7003fc79-73fb-4c91-acc4-9e80550e12d6": [
+                "resources/images/singleColor.png",
+                "cc.Texture2D"
+            ],
+            "e029a6dc-c67e-4a95-b529-1469f4835ae2": [
+                "resources/images/speed",
+                "cc.SpriteFrame",
+                1
+            ],
+            "414199a9-da23-4e78-abf3-79450dd359b6": [
+                "resources/images/speed.png",
+                "cc.Texture2D"
+            ],
+            "96cf3b2e-cf5e-4a40-b886-7c729fb1af70": [
+                "resources/images/star",
+                "cc.SpriteFrame",
+                1
+            ],
+            "8149c95f-56e2-4d14-9a58-c9854652a3f4": [
+                "resources/images/star.png",
+                "cc.Texture2D"
+            ],
+            "19a2af66-91fc-4258-b251-f7ec317f20ce": [
+                "resources/images/startBG",
+                "cc.SpriteFrame",
+                1
+            ],
+            "03d6975d-b5ff-4583-9e6c-59a28619219a": [
+                "resources/images/startBG.jpg",
+                "cc.Texture2D"
+            ],
+            "ba430442-e246-4c2d-98df-ae643610d944": [
+                "resources/images/startBG1",
+                "cc.SpriteFrame",
+                1
+            ],
+            "1b867585-899b-418d-b69c-3fb02c96b17a": [
+                "resources/images/startBG1.jpg",
+                "cc.Texture2D"
+            ],
+            "84361acb-9786-454b-bc9c-0f585e5cae83": [
+                "resources/images/startLbl",
+                "cc.SpriteFrame",
+                1
+            ],
+            "80647c54-f273-4b72-a9b3-24acf73f6cf4": [
+                "resources/images/startLbl.png",
+                "cc.Texture2D"
+            ],
+            "e7d25dc8-2791-406e-981c-d6285506edd4": [
+                "resources/sounds/HappyLevel.mp3",
+                "cc.AudioClip"
+            ],
+            "e50d4816-5530-4480-8ab5-8a80b3458a79": [
+                "resources/sounds/right.mp3",
+                "cc.AudioClip"
+            ],
+            "35a9aaa2-14fa-431d-b674-4bfc561230b7": [
+                "resources/sounds/wrong.mp3",
+                "cc.AudioClip"
+            ]
+        },
+        internal: {
+            "71561142-4c83-4933-afca-cb7a17f67053": [
+                "image/default_btn_disabled.png",
+                "cc.Texture2D"
+            ],
+            "e851e89b-faa2-4484-bea6-5c01dd9f06e2": [
+                "image/default_btn_normal.png",
+                "cc.Texture2D"
+            ],
+            "b43ff3c2-02bb-4874-81f7-f2dea6970f18": [
+                "image/default_btn_pressed.png",
+                "cc.Texture2D"
+            ],
+            "d81ec8ad-247c-4e62-aa3c-d35c4193c7af": [
+                "image/default_panel.png",
+                "cc.Texture2D"
+            ],
+            "cfef78f1-c8df-49b7-8ed0-4c953ace2621": [
+                "image/default_progressbar.png",
+                "cc.Texture2D"
+            ],
+            "99170b0b-d210-46f1-b213-7d9e3f23098a": [
+                "image/default_progressbar_bg.png",
+                "cc.Texture2D"
+            ],
+            "567dcd80-8bf4-4535-8a5a-313f1caf078a": [
+                "image/default_radio_button_off.png",
+                "cc.Texture2D"
+            ],
+            "9d60001f-b5f4-4726-a629-2659e3ded0b8": [
+                "image/default_radio_button_on.png",
+                "cc.Texture2D"
+            ],
+            "0291c134-b3da-4098-b7b5-e397edbe947f": [
+                "image/default_scrollbar.png",
+                "cc.Texture2D"
+            ],
+            "4bab67cb-18e6-4099-b840-355f0473f890": [
+                "image/default_scrollbar_bg.png",
+                "cc.Texture2D"
+            ],
+            "d6d3ca85-4681-47c1-b5dd-d036a9d39ea2": [
+                "image/default_scrollbar_vertical.png",
+                "cc.Texture2D"
+            ],
+            "617323dd-11f4-4dd3-8eec-0caf6b3b45b9": [
+                "image/default_scrollbar_vertical_bg.png",
+                "cc.Texture2D"
+            ],
+            "6e056173-d285-473c-b206-40a7fff5386e": [
+                "image/default_sprite.png",
+                "cc.Texture2D"
+            ],
+            "0275e94c-56a7-410f-bd1a-fc7483f7d14a": [
+                "image/default_sprite_splash.png",
+                "cc.Texture2D"
+            ],
+            "73a0903d-d80e-4e3c-aa67-f999543c08f5": [
+                "image/default_toggle_checkmark.png",
+                "cc.Texture2D"
+            ],
+            "c25b9d50-c8fc-4d27-beeb-6e7c1f2e5c0f": [
+                "image/default_toggle_disabled.png",
+                "cc.Texture2D"
+            ],
+            "d29077ba-1627-4a72-9579-7b56a235340c": [
+                "image/default_toggle_normal.png",
+                "cc.Texture2D"
+            ],
+            "b181c1e4-0a72-4a91-bfb0-ae6f36ca60bd": [
+                "image/default_toggle_pressed.png",
+                "cc.Texture2D"
+            ],
+            "2be36297-9abb-4fee-8049-9ed5e271da8a": [
+                "misc/default_video.mp4",
+                "cc.RawAsset"
+            ],
+            "b8223619-7e38-47c4-841f-9160c232495a": [
+                "obsolete/atom.plist",
+                "cc.ParticleAsset"
+            ],
+            "b2687ac4-099e-403c-a192-ff477686f4f5": [
+                "particle/atom.plist",
+                "cc.ParticleAsset"
+            ]
+        }
+    },
+    launchScene: "db://assets/scene/main.fire",
+    scenes: [
+        {
+            url: "db://assets/scene/main.fire",
+            uuid: "548c7302-aa54-45cb-92df-37b4b82e06bc"
+        }
+    ],
+    debug: true
+};

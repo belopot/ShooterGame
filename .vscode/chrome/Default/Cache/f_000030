@@ -1,0 +1,520 @@
+(function() {"use strict";var __module = CC_EDITOR ? module : {exports:{}};var __filename = 'preview-scripts/assets/script/game.js';var __require = CC_EDITOR ? function (request) {return cc.require(request, require);} : function (request) {return cc.require(request, __filename);};function __define (exports, require, module) {"use strict";
+cc._RF.push(module, 'a2362CWaGFI+6EMgLMht/cQ', 'game', __filename);
+// script/game.js
+
+'use strict';
+
+var CHD = require("commonHandler");
+cc.Class({
+    extends: cc.Component,
+
+    properties: {
+        scoreLabel: cc.Label,
+        soundBtn: cc.Node,
+        gameOverNode: cc.Node,
+        continueNode: cc.Node,
+        player: cc.Node,
+        scoreView: cc.Node,
+
+        bulletPrefab: cc.Prefab,
+        blockPrefab: cc.Prefab,
+        blastPrefab: cc.Prefab,
+
+        endBlockPrefab: cc.Prefab,
+        starBlockPrefab: cc.Prefab,
+        blockListPrefab: cc.Prefab,
+        specListPrefab: cc.Prefab,
+
+        fastPrefab: cc.Prefab,
+        powerPrefab: cc.Prefab,
+        doublePrefab: cc.Prefab,
+        rocketPrefab: cc.Prefab
+    },
+
+    onLoad: function onLoad() {
+
+        this.makePools();
+
+        cc.director.getCollisionManager().enabled = true;
+    },
+    makePools: function makePools() {
+        CHD.bulletPool = new cc.NodePool();
+        for (var i = 0; i < 125; ++i) {
+            var bullet = cc.instantiate(this.bulletPrefab);
+            CHD.bulletPool.put(bullet);
+        }
+
+        CHD.blockPool = new cc.NodePool();
+        for (var _i = 0; _i < 100; ++_i) {
+            var block = cc.instantiate(this.blockPrefab);
+            CHD.blockPool.put(block);
+        }
+
+        CHD.blastPool = new cc.NodePool();
+        for (var _i2 = 0; _i2 < 100; ++_i2) {
+            var blast = cc.instantiate(this.blastPrefab);
+            blast.getComponent(cc.ParticleSystem).stopSystem();
+            CHD.blastPool.put(blast);
+        }
+    },
+    start: function start() {
+        var self = this;
+
+        // CHD.centerLine = (this.node.height/2 - Math.abs(this.player.y))/2;
+        // CHD.actorLine = this.player.y+this.player.height;
+        // CHD.endLine = -this.node.height/2;
+        // this.level = 1;
+        // this.levelInCount = 9;
+        // this.levelInNum = 0;
+
+        this.isloadSoundOn = true;
+        if (!CHD.getSoundStatus()) {
+            this.soundBtn.getComponent(cc.Sprite).spriteFrame = new cc.SpriteFrame(this.soundOffTexture);
+        } else {
+            cc.audioEngine.play(cc.url.raw('resources/sounds/HappyLevel.mp3'), true, 1);
+            this.isloadSoundOn = false;
+        }
+
+        this.node.on('touchstart', this.moveCursor, this);
+        this.node.on('touchmove', this.moveCursor, this);
+
+        this.node.on('passedCenterLine', function (event) {
+            event.stopPropagation();
+            self.createBonus();
+        }, this);
+        this.node.on('passedActorLine', function (event) {
+            event.stopPropagation();
+            self.createNextBlock();
+        }, this);
+
+        this.node.on('changedScore', function (event) {
+            event.stopPropagation();
+            self.changeScoreView();
+        }, this);
+
+        this.node.on('exploreALL', function (event) {
+            event.stopPropagation();
+            self.exploreAllBlocks();
+        }, this);
+
+        this.node.on('collectBonus', function () {
+            self.bonusToPlayer();
+        }, this);
+
+        // this.init();
+        // this.firstBlockGroup();
+
+        // this.soundBtn.on('touchstart', function(){
+        //     let isSound = CHD.getSoundStatus();
+        //     isSound = !isSound;
+        //     if (this.isloadSoundOn) {
+        //         this.isloadSoundOn = false;
+        //         cc.audioEngine.play(cc.url.raw('resources/sounds/HappyLevel.mp3'), true, 1);                
+        //     }
+        //     if (isSound) {
+        //         this.soundBtn.getComponent(cc.Sprite).spriteFrame = new cc.SpriteFrame(this.soundOnTexture);
+        //         cc.audioEngine.resumeAll();
+        //     } else {
+        //         this.soundBtn.getComponent(cc.Sprite).spriteFrame = new cc.SpriteFrame(this.soundOffTexture);
+        //         cc.audioEngine.pauseAll();
+        //     }
+        //     CHD.setSoundStatus(isSound);
+        // }, this);
+        // this.node.on('touchstart', function(event) {
+        //     if(!this.started) return;
+        //     let x_pos = event.getLocation().x;
+        //     if(x_pos <= 540){
+        //         this.clickLeftBtn();
+        //     }else{
+        //         this.clickRightBtn();
+        //     }
+        // }, this);
+    },
+    init: function init() {
+        this.score = 0;
+        // CHD.level = 0;
+        CHD.centerLine = (this.node.height / 2 - Math.abs(this.player.y)) / 2;
+        CHD.actorLine = this.player.y + this.player.height;
+        CHD.endLine = -this.node.height / 2;
+        CHD.collideStatus = [0, 0];
+        this.level = 1;
+        this.levelInCount = 9;
+        this.levelInNum = 0;
+
+        this.isGameOver = false;
+        this.cursorXPos = 0;
+
+        this.removeAllChilds();
+
+        this.firstBlockGroup();
+        this.isPaused = false;
+        this.player.getComponent('player').init();
+    },
+    createBonus: function createBonus() {
+        if (this.isPaused) return;
+        this.createRandBlocks();
+
+        var type = parseInt(5 * Math.random());
+        if (type !== 4) {
+            if (CHD.bulletMulti == 3) {
+                type = parseInt(2 * Math.random()) + 1;
+            } else {
+                type = parseInt(3 * Math.random()) + 1;
+            }
+        }
+        var newProp = null;
+        switch (type) {
+            case 1:
+                newProp = cc.instantiate(this.fastPrefab);
+                break;
+            case 2:
+                newProp = cc.instantiate(this.powerPrefab);
+                break;
+            case 3:
+                newProp = cc.instantiate(this.doublePrefab);
+                break;
+            case 4:
+                newProp = cc.instantiate(this.rocketPrefab);
+                break;
+        }
+        var _x = parseInt((this.node.width - newProp.width * 2) * Math.random()) + 1 + newProp.width,
+            _y = this.node.height / 2 + newProp.height;
+        newProp.setPosition(_x, _y);
+        this.node.addChild(newProp);
+
+        newProp.runAction(cc.sequence(cc.moveTo(CHD.blockDropSpeed, newProp.x, -this.node.height / 2 - 100), cc.callFunc(this.removeProp, newProp, true)));
+    },
+    removeProp: function removeProp(prop) {
+        prop.stopAllActions();
+        prop.removeFromParent();
+    },
+    createNextBlock: function createNextBlock() {
+        if (this.isPaused) return;
+        // console.log('nodes   '+ this.node.children.length);
+        this.levelInNum += 1;
+        if (this.levelInNum == this.levelInCount - 1) {
+            /////specBlock
+            this.createSpecGroup();
+        } else if (this.levelInCount == this.levelInNum) {
+            this.levelInNum = 0;
+            this.level += 1;
+            this.levelInCount = 7;
+            /////lastBlock
+            this.createEndGroup();
+        } else {
+            this.createBlockGroup();
+        }
+    },
+    getBlockList: function getBlockList() {
+        var newList = cc.instantiate(this.blockListPrefab);
+        newList.setPosition(-this.node.width / 2, this.node.height / 2);
+        newList.parent = this.node;
+        newList.width = this.node.width;
+        return newList;
+    },
+    firstBlockGroup: function firstBlockGroup() {
+        var self = this;
+        var blockList = this.getBlockList();
+        for (var y = 0; y < 3; y++) {
+            for (var x = 0; x < 5; x++) {
+                var block = null;
+                if (CHD.blockPool.size() > 0) {
+                    block = CHD.blockPool.get();
+                } else {
+                    block = cc.instantiate(this.blockPrefab);
+                    console.log('createdNewBlock');
+                }
+
+                block.parent = blockList;
+                block.width = blockList.width / 5;
+                block.getComponent(cc.BoxCollider).size.width = block.width;
+                block.setPosition((x + 0.5) * block.width, y * 150);
+
+                var label = parseInt(3 * Math.random()) + 1;
+                block.getChildByName('boxtext').getComponent(cc.Label).string = label;
+
+                if (label == 1) {
+                    block.color = new cc.Color(97, 193, 7);
+                } else {
+                    block.color = new cc.Color(205, 27, 23);
+                }
+            }
+        }
+        blockList.height = 450;
+        blockList.runAction(cc.sequence(cc.moveTo(CHD.blockDropSpeed, blockList.x, -this.node.height / 2 - 450), cc.callFunc(self.removeBlockList, blockList, true)));
+    },
+    removeBlockList: function removeBlockList(blockList) {
+        blockList.removeFromParent();
+    },
+    createBlockGroup: function createBlockGroup() {
+        var self = this;
+        var blockList = this.getBlockList();
+        var minBlock = parseInt(5 * Math.random());
+
+        for (var x = 0; x < 5; x++) {
+            var block = null;
+            var isMin = 0;
+            var isStar = 0;
+            if (x == minBlock) {
+                isMin = 1;
+            } else {
+                isStar = parseInt(5 * Math.random());
+            }
+
+            if (isStar === 1) {
+                block = self.getBlock(x, 0, isMin, true);
+            } else {
+                block = self.getBlock(x, 0, isMin, false);
+            }
+
+            block.parent = blockList;
+        }
+
+        var ran = parseInt(8 * Math.random());
+        if (ran < 5) {
+            var _block = self.getBlock(ran, 1, 0, false);
+            _block.parent = blockList;
+        }
+
+        blockList.runAction(cc.sequence(cc.moveTo(CHD.blockDropSpeed, blockList.x, -this.node.height / 2 - 100), cc.callFunc(self.removeBlockList, blockList, true)));
+    },
+    createSpecGroup: function createSpecGroup() {
+        var self = this;
+        var maxCount = parseInt(5 * Math.random());
+        var specList = cc.instantiate(this.specListPrefab);
+        specList.setPosition(-this.node.width / 2, this.node.height / 2);
+        specList.parent = this.node;
+        specList.width = this.node.width;
+        specList.height = 0;
+        if (maxCount === 1) {
+            maxCount = 7;
+            specList.getComponent('specList').setMaxGroupCount(maxCount);
+        } else {
+            maxCount = 1;
+        }
+        var dT = 0.8 * CHD.blockDropSpeed * (this.node.height + maxCount * 20 * 150) / this.node.height;
+        specList.runAction(cc.sequence(cc.moveTo(dT, specList.x, -this.node.height / 2 - maxCount * 20 * 150), cc.callFunc(self.removeBlockList, specList, true)));
+    },
+    createRandBlocks: function createRandBlocks() {
+        var self = this;
+        var blockList = this.getBlockList();
+
+        if (this.levelInNum == this.levelInCount - 2) {
+            for (var x = 0; x < 5; x++) {
+                var block = self.getBlock(x, 0, -1, false);
+                block.parent = blockList;
+                block.getChildByName('boxtext').getComponent(cc.Label).string = 1;
+                block.color = new cc.Color(97, 193, 7);
+            }
+        } else if (this.levelInNum < this.levelInCount - 2 && this.levelInNum != 0) {
+            var ran = parseInt(4 * Math.random());
+            if (ran == 1) {
+                var ran = parseInt(5 * Math.random());
+                var _block2 = self.getBlock(ran, 0, -1, false);
+
+                var label = _block2.getChildByName('boxtext').getComponent(cc.Label).string;
+                label = Number(label);
+                if (label < 80) {
+                    CHD.blockPool.put(_block2);
+                } else {
+                    _block2.parent = blockList;
+                    _block2.getChildByName('boxtext').getComponent(cc.Label).string = CHD.convertNum(label * 10);
+                    _block2.color = new cc.Color(147, 41, 156);
+                }
+            }
+        }
+
+        blockList.getComponent('blockList').disableEvent();
+        blockList.runAction(cc.sequence(cc.moveTo(0.8, blockList.x, -this.node.height / 2 - 100), cc.callFunc(self.removeBlockList, blockList, true)));
+    },
+    createEndGroup: function createEndGroup() {
+        var self = this;
+        var blockList = this.getBlockList();
+        var yCount = 1;
+        if (this.level % 4 === 0) {
+            yCount = 4;
+        }
+        for (var y = 0; y < yCount; y++) {
+            for (var x = 0; x < 5; x++) {
+                var block = null;
+                // if (CHD.blockPool.size() > 0) {
+                //     block = CHD.blockPool.get();
+                // } else {
+                block = cc.instantiate(this.endBlockPrefab);
+                // }
+
+                block.parent = blockList;
+                block.width = blockList.width / 5;
+                block.getComponent(cc.BoxCollider).size.width = block.width;
+                block.setPosition((x + 0.5) * block.width, y * 150);
+
+                var level = this.level - 1;
+                var maxVal = parseInt(900 * level * level + 10);
+                var label = parseInt((maxVal - parseInt(maxVal * Math.random() / 4)) / yCount);
+                block.getChildByName('boxtext').getComponent(cc.Label).string = CHD.convertNum(label);
+            }
+        }
+        blockList.height = 450;
+        blockList.runAction(cc.sequence(cc.moveTo(CHD.blockDropSpeed, blockList.x, -this.node.height / 2 - 450), cc.callFunc(self.removeBlockList, blockList, true)));
+    },
+    getBlock: function getBlock(xPos, yPos, isMin, isStar) {
+        var block = null;
+        if (isStar) {
+            block = cc.instantiate(this.starBlockPrefab);
+        } else {
+            if (CHD.blockPool.size() > 0) {
+                block = CHD.blockPool.get();
+            } else {
+                block = cc.instantiate(this.blockPrefab);
+            }
+        }
+
+        block.width = this.node.width / 5;
+        block.getComponent(cc.BoxCollider).size.width = block.width;
+        block.setPosition((xPos + 0.5) * block.width, yPos * 150);
+        block.active = true;
+
+        var level = this.level - 1;
+
+        var maxVal = parseInt(90 * level * level + 10);
+        if (isMin === 1) {
+            var label = (3 + this.levelInNum) * parseInt(maxVal / 4);
+            block.getChildByName('boxtext').getComponent(cc.Label).string = CHD.convertNum(label);
+            block.color = new cc.Color(97, 193, 7);
+        } else if (isMin === 0) {
+            var _label = maxVal - parseInt(maxVal * Math.random() / 4) + this.levelInNum * parseInt(maxVal / 4);
+            block.getChildByName('boxtext').getComponent(cc.Label).string = CHD.convertNum(_label);
+            block.color = new cc.Color(205, 25, 25);
+        }
+
+        return block;
+    },
+    changeScoreView: function changeScoreView() {
+        // this.scoreView.getComponent(cc.Label).string = CHD.convertNum(CHD.score);
+        this.scoreView.runAction(cc.sequence(cc.scaleTo(0.08, 1.4), cc.scaleTo(0.05, 1)));
+    },
+    moveCursor: function moveCursor(event) {
+        var locationv = event.getLocation();
+        var location = this.node.convertToNodeSpaceAR(locationv);
+
+        var minX = -this.node.width / 2 + this.player.width / 2,
+            maxX = -minX;
+        if (location.x < minX) location.x = minX;
+        if (location.x > maxX) location.x = maxX;
+        this.cursorXPos = location.x;
+    },
+    update: function update(dt) {
+        if (this.isPaused || this.player.active == false) return;
+
+        var deltaX = this.cursorXPos - this.player.x;
+        if (deltaX === 0) return;
+        if (CHD.collideStatus[0] > 0 && deltaX * CHD.collideStatus[1] > 0) return;
+
+        var absDeltaX = Math.abs(deltaX);
+        if (absDeltaX < 25) {
+            this.player.x = this.cursorXPos;
+        } else {
+            this.player.x += 25 * deltaX / absDeltaX;
+        }
+
+        if (CHD.rocketStatus) {
+            this.node.emit('collectBonus');
+        }
+    },
+    gameOver: function gameOver() {
+        this.stopAllChilds();
+        this.node.active = false;
+        this.gameOverNode.active = true;
+        // this.gameOverNode.getComponent('gameOver').setScore(this.score);
+    },
+    pauseGame: function pauseGame() {
+
+        this.pauseAllChilds();
+
+        this.node.runAction(cc.sequence(cc.moveBy(0.015, 5, 50), cc.moveBy(0.015, -5, -50), cc.moveBy(0.01, -5, 30), cc.moveBy(0.01, 5, -30)));
+
+        this.player.active = false;
+        this.isPaused = false;
+        this.resumeAllChilds();
+
+        this.continueNode.active = true;
+        this.continueNode.getComponent('cover').init();
+    },
+    removeAllChilds: function removeAllChilds() {
+        this.isPaused = true;
+        var childs = this.node.children;
+
+        for (var x in childs) {
+            if (childs[x].name == 'blockList' || childs[x].name == 'specList') {
+                childs[x].removeFromParent();
+            } else if (childs[x].name == 'bullet') {
+                childs[x].stopAllActions();
+                CHD.bulletPool.put(childs[x]);
+            } else if (childs[x].name == 'forceful' || childs[x].name == 'double' || childs[x].name == 'fast' || childs[x].name == 'rocket') {
+                childs[x].removeFromParent();
+            }
+        }
+    },
+    stopAllChilds: function stopAllChilds() {
+        this.isPaused = true;
+        var childs = this.node.children;
+        for (var x in childs) {
+            if (childs[x].name == 'blockList' || childs[x].name == 'specList') {
+                childs[x].stopAllActions();
+                childs[x].removeFromParent();
+            } else if (childs[x].name == 'bullet') {
+                childs[x].stopAllActions();
+                CHD.bulletPool.put(childs[x]);
+            } else if (childs[x].name == 'forceful' || childs[x].name == 'double' || childs[x].name == 'fast' || childs[x].name == 'rocket') {
+                childs[x].removeFromParent();
+            }
+        }
+    },
+    pauseAllChilds: function pauseAllChilds() {
+        this.isPaused = true;
+        var childs = this.node.children;
+        for (var index in childs) {
+            childs[index].pauseAllActions();
+        }
+    },
+    resumeAllChilds: function resumeAllChilds() {
+        var childs = this.node.children;
+        for (var index in childs) {
+            childs[index].resumeAllActions();
+        }
+    },
+    exploreAllBlocks: function exploreAllBlocks() {
+        console.log('exploreAll');
+        var childs = this.node.children;
+        for (var x in childs) {
+            if (childs[x].name == 'blockList') {
+                childs[x].getComponent('blockList').exploreAll();
+            } else if (childs[x].name == 'specList') {
+                childs[x].getComponent('specList').exploreAll();
+            }
+        }
+    },
+    bonusToPlayer: function bonusToPlayer() {
+        var childs = this.node.children;
+        for (var x in childs) {
+            if (childs[x].name == 'fast' || childs[x].name == 'forceful' || childs[x].name == 'double') {
+                childs[x].stopAllActions();
+                childs[x].runAction(cc.moveTo(0.2, this.player.x, this.player.y + this.player.height / 2));
+            }
+        }
+    }
+});
+
+cc._RF.pop();
+        }
+        if (CC_EDITOR) {
+            __define(__module.exports, __require, __module);
+        }
+        else {
+            cc.registerModuleFunc(__filename, function () {
+                __define(__module.exports, __require, __module);
+            });
+        }
+        })();
+        //# sourceMappingURL=game.js.map
+        
